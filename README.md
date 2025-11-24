@@ -67,26 +67,26 @@ This project demonstrates end-to-end development of a complete real-time system 
 ---
 ## 📁 Folder Structure
 
-chat-app/ \n
-│ \n
-├── backend/ \n
-│ ├── controllers/ \n
-│ ├── routes/ \n
-│ ├── models/ \n
-│ ├── socket/ \n
-│ │ └── socket.js \n
-│ ├── db/ \n
-│ │ └── connectMongo.js \n
-│ └── server.js \n
-│ \n
-├── frontend/ \n
-│ ├── src/ \n
-│ ├── public/ \n
-│ ├── package.json \n
-│ └── vite.config.js \n
-│ \n
-├── package.json (root) \n
-└── README.md \n
+chat-app/ <br>
+│ <br>
+├── backend/ <br>
+│ ├── controllers/ <br>
+│ ├── routes/ <br>
+│ ├── models/ <br>
+│ ├── socket/ <br>
+│ │ └── socket.js <br>
+│ ├── db/ <br>
+│ │ └── connectMongo.js <br>
+│ └── server.js <br>
+│ <br>
+├── frontend/ <br>
+│ ├── src/ <br>
+│ ├── public/ <br>
+│ ├── package.json <br>
+│ └── vite.config.js <br>
+│ <br>
+├── package.json (root) <br>
+└── README.md <br>
 
 ---
 
