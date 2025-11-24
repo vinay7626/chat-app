@@ -94,20 +94,20 @@ chat-app/ <br>
 
 ### Backend (`backend/.env`)
 
-PORT=5000
-MONGO_DB_URI=your_mongodb_atlas_url
-JWT_SECRET=your_jwt_secret
-CLIENT_URL=http://localhost:3000
-NODE_ENV=development
+PORT=5000<br>
+MONGO_DB_URI=your_mongodb_atlas_url<br>
+JWT_SECRET=your_jwt_secret<br>
+CLIENT_URL=http://localhost:3000<br>
+NODE_ENV=development<br>
 
 ### Frontend (`frontend/.env`)
 
 ### Production (Render)
 
-MONGO_DB_URI=your_atlas_url
-JWT_SECRET=your_secret
-CLIENT_URL=https://your-render-url
-NODE_ENV=production
+MONGO_DB_URI=your_atlas_url<br>
+JWT_SECRET=your_secret<br>
+CLIENT_URL=https://your-render-url<br>
+NODE_ENV=production<br>
 
 ## 🏗 Running Locally
 
