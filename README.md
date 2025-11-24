@@ -64,7 +64,8 @@ This project demonstrates end-to-end development of a complete real-time system 
 - Centralized Mongo connection  
 - Reusable socket helpers  
 
----## 📁 Folder Structure
+---
+## 📁 Folder Structure
 
 chat-app/
 │
