@@ -15,7 +15,6 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);  // <-- shared http server
-//redeploy
 const __dirname = path.resolve();
 const PORT = process.env.PORT || 5000;
 
