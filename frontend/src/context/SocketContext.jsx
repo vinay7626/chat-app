@@ -1,41 +1,71 @@
-import { createContext, useState, useEffect, useContext } from "react";
+// frontend/src/context/SocketContext.jsx
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useAuthContext } from "./AuthContext";
 import io from "socket.io-client";
 
 const SocketContext = createContext();
 
-export const useSocketContext = () => {
-	return useContext(SocketContext);
-};
+export const useSocketContext = () => useContext(SocketContext);
 
 export const SocketContextProvider = ({ children }) => {
-	const [socket, setSocket] = useState(null);
-	const [onlineUsers, setOnlineUsers] = useState([]);
-	const { authUser } = useAuthContext();
+  const { authUser } = useAuthContext();
+  const [socket, setSocket] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
-	useEffect(() => {
-		if (authUser) {
-			const socket = io("https://chat-app-yt.onrender.com", {
-				query: {
-					userId: authUser._id,
-				},
-			});
+  // Local dev = localhost:5000
+  // Production = VITE_SOCKET_URL from env
+  const SOCKET_URL =
+    import.meta.env.VITE_SOCKET_URL ||
+    (window.location.hostname === "localhost"
+      ? "http://localhost:5000"
+      : window.location.origin);
 
-			setSocket(socket);
+  useEffect(() => {
+    if (!authUser) {
+      if (socket) socket.close();
+      setSocket(null);
+      return;
+    }
 
-			// socket.on() is used to listen to the events. can be used both on client and server side
-			socket.on("getOnlineUsers", (users) => {
-				setOnlineUsers(users);
-			});
+    const newSocket = io(SOCKET_URL, {
+      query: { userId: authUser._id },
 
-			return () => socket.close();
-		} else {
-			if (socket) {
-				socket.close();
-				setSocket(null);
-			}
-		}
-	}, [authUser]);
+      // FIX #1 – required for localhost dev
+      transports: ["websocket", "polling"],
 
-	return <SocketContext.Provider value={{ socket, onlineUsers }}>{children}</SocketContext.Provider>;
+      // FIX #2 – important for cookies (jwt)
+      withCredentials: true,
+
+      // FIX #3 – helps WebSocket upgrade succeed
+      reconnectionAttempts: 5,
+      reconnectionDelay: 500,
+    });
+
+    setSocket(newSocket);
+
+    newSocket.on("connect", () => {
+      console.log("Socket connected:", newSocket.id);
+    });
+
+    newSocket.on("getOnlineUsers", (users) => {
+      setOnlineUsers(users);
+    });
+
+    newSocket.on("disconnect", () => {
+      console.log("Socket disconnected");
+    });
+
+    return () => newSocket.close();
+  }, [authUser?._id]);
+
+  return (
+    <SocketContext.Provider value={{ socket, onlineUsers }}>
+      {children}
+    </SocketContext.Provider>
+  );
 };
