@@ -21,7 +21,7 @@ const Home = () => {
 	const showMessageContainer = !isMobile || selectedConversation;
 
 	return (
-		<div className='flex md:w-auto w-screen md:h-[550px] h-dvh max-md:pb-10 sm:rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+		<div className='flex md:w-auto w-screen md:h-[550px] h-full max-md:pb-3 max-md:[max-h-dvh] sm:rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
 			{/* Sidebar - hidden on mobile when chat is selected */}
 			<div className={`${showSidebar ? 'flex' : 'hidden'} w-full sm:w-auto`}>
 				<Sidebar />
